@@ -1,0 +1,49 @@
+app waspTestproject {
+  wasp: {
+    version: "^0.16.4"
+  },
+  title: "Wasp Recipe-Website",
+  auth: {
+    // Tells Wasp which entity to use for storing users.
+    userEntity: User,
+    methods: {
+      // Enable username and password auth.
+      usernameAndPassword: {}
+    },
+    onAuthFailedRedirectTo: "/login"
+  }
+}
+
+route RootRoute { path: "/", to: MainPage }
+page MainPage {
+authRequired: true,
+  component: import { MainPage } from "@src/MainPage"
+}
+
+route AddRecipeRoute { path: "/addRecipe", to: AddRecipe }
+page AddRecipe {
+authRequired: true,
+  component: import { NewRecipeForm } from "@src/NewRecipeForm"
+}
+
+route SignupRoute { path: "/signup", to: SignupPage }
+page SignupPage {
+  component: import { SignupPage } from "@src/SignupPage"
+}
+
+route LoginRoute { path: "/login", to: LoginPage }
+page LoginPage {
+  component: import { LoginPage } from "@src/LoginPage"
+}
+
+
+query getRecipe {
+  fn: import { getRecipe } from "@src/queries",
+  entities: [Recipe]
+}
+
+action createRecipe {
+  fn: import { createRecipe } from "@src/actions",
+  entities: [Recipe]
+}
+

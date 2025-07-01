@@ -8,7 +8,7 @@ export const MainPage = ({ user }) => {
 	return (
 		<div className="h-screen w-full flex flex-col">
 			<Header />
-			<div className='flex flex-end'>
+			<div className='flex justify-center'>
 				{recipes && <RecipeList recipes={recipes} />}
 
 				{isLoading && 'Loading...'}
